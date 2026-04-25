@@ -8,7 +8,6 @@ httpcore==1.0.9
 httptools==0.7.1
 httpx==0.27.2
 idna==3.13
--e git+https://github.com/ryankhullar01-spec/openai-chatkit-starter-app.git@e1574fd8f6e25fd45ea96076ecfaf51f8e0c97d8#egg=managed_chatkit_backend&subdirectory=managed-chatkit/backend
 pydantic==2.13.3
 pydantic_core==2.46.3
 python-dotenv==1.2.2
