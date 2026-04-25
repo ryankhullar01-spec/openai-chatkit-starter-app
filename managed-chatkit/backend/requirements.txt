@@ -1,0 +1,23 @@
+annotated-types==0.7.0
+anyio==4.13.0
+certifi==2026.4.22
+click==8.3.3
+fastapi==0.115.14
+h11==0.16.0
+httpcore==1.0.9
+httptools==0.7.1
+httpx==0.27.2
+idna==3.13
+-e git+https://github.com/ryankhullar01-spec/openai-chatkit-starter-app.git@e1574fd8f6e25fd45ea96076ecfaf51f8e0c97d8#egg=managed_chatkit_backend&subdirectory=managed-chatkit/backend
+pydantic==2.13.3
+pydantic_core==2.46.3
+python-dotenv==1.2.2
+PyYAML==6.0.3
+sniffio==1.3.1
+starlette==0.46.2
+typing-inspection==0.4.2
+typing_extensions==4.15.0
+uvicorn==0.36.1
+uvloop==0.22.1
+watchfiles==1.1.1
+websockets==16.0
