@@ -41,7 +41,7 @@ export function ChatKitPanel() {
   const rootVars: CSSProperties = {
     ["--bb-purple" as string]: purple,
     ["--bb-accent" as string]: accent,
-    ["--bb-third-color" as string]: "#EEE5FF", // lavender background
+    ["--bb-third-color" as string]: "#EEE5FF",
     ["--bb-glow-color" as string]: accent,
     ["--bb-scrollbar-thumb" as string]: accent,
     ["--bb-shadow-strong" as string]: "0 18px 45px rgba(0,0,0,0.18)",
@@ -55,31 +55,18 @@ export function ChatKitPanel() {
     <>
       <style>
         {`
-/* UNIVERSAL OVERRIDES — ALWAYS WIN */
+/* SAFE, NORMAL OVERRIDES */
 
-/* FORCE outgoing bubble to #C0B2DA */
-div[class*="out"],
-div[class*="Out"],
-div[class*="outgoing"],
-div[class*="Outgoing"],
-div[class*="message-out"],
-div[class*="bubble-out"],
-div[class*="bubble--out"],
-div[class*="message--out"] {
+/* Outgoing bubble = #C0B2DA */
+.ck-message-out .ck-message-bubble,
+.ck-message--outgoing .ck-message-bubble {
   background-color: #C0B2DA !important;
   color: white !important;
-  border: none !important;
 }
 
-/* FORCE lavender chat background (#EEE5FF) */
-div[class*="chat"],
-div[class*="Chat"],
-div[class*="surface"],
-div[class*="wrapper"],
-div[class*="scroll"],
-div[class*="scrollable"],
-div[class*="messages"],
-div[class*="Messages"] {
+/* Chat background = #EEE5FF */
+.ck-chat-scrollable,
+.ck-chat-root {
   background: #EEE5FF !important;
 }
 
@@ -233,3 +220,4 @@ div[class*="Messages"] {
     </>
   );
 }
+
