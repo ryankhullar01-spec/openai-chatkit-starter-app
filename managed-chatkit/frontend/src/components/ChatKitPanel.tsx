@@ -41,7 +41,7 @@ export function ChatKitPanel() {
   const rootVars: CSSProperties = {
     ["--bb-purple" as string]: purple,
     ["--bb-accent" as string]: accent,
-    ["--bb-third-color" as string]: house === "default" ? "#faf7ff" : accent,
+    ["--bb-third-color" as string]: "#EEE5FF", // lavender background
     ["--bb-glow-color" as string]: accent,
     ["--bb-scrollbar-thumb" as string]: accent,
     ["--bb-shadow-strong" as string]: "0 18px 45px rgba(0,0,0,0.18)",
@@ -55,14 +55,45 @@ export function ChatKitPanel() {
     <>
       <style>
         {`
-/* GLOBAL RESET */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
+/* UNIVERSAL OVERRIDES — ALWAYS WIN */
+
+/* FORCE outgoing bubble to #C0B2DA */
+div[class*="out"],
+div[class*="Out"],
+div[class*="outgoing"],
+div[class*="Outgoing"],
+div[class*="message-out"],
+div[class*="bubble-out"],
+div[class*="bubble--out"],
+div[class*="message--out"] {
+  background-color: #C0B2DA !important;
+  color: white !important;
+  border: none !important;
+}
+
+/* FORCE lavender chat background (#EEE5FF) */
+div[class*="chat"],
+div[class*="Chat"],
+div[class*="surface"],
+div[class*="wrapper"],
+div[class*="scroll"],
+div[class*="scrollable"],
+div[class*="messages"],
+div[class*="Messages"] {
+  background: #EEE5FF !important;
+}
+
+/* Smooth glow for house selector */
+.bb-house-select {
+  transition:
+    box-shadow var(--bb-transition-medium),
+    transform var(--bb-transition-medium),
+    opacity var(--bb-transition-medium);
+}
+.bb-house-select:hover {
+  box-shadow: 0 0 14px var(--bb-accent) !important;
+  transform: scale(1.02);
+  opacity: 1;
 }
 
 /* BACKGROUND ENGINE */
@@ -121,163 +152,21 @@ export function ChatKitPanel() {
 }
 
 /* TYPING INDICATOR */
-.ck-typing-indicator {
-  display: flex !important;
-  gap: 4px !important;
-  padding: 6px 10px !important;
-  margin-left: 6px !important;
-  opacity: 0;
-  animation: bbTypingFadeIn 0.4s ease forwards;
-}
-@keyframes bbTypingFadeIn {
-  to { opacity: 1; }
-}
 .ck-typing-indicator-dot {
-  width: 7px !important;
-  height: 7px !important;
   background: var(--bb-accent) !important;
-  border-radius: 50% !important;
-  animation: bbTypingBounce 1.2s infinite ease-in-out;
-}
-.ck-typing-indicator-dot:nth-child(2) { animation-delay: 0.15s; }
-.ck-typing-indicator-dot:nth-child(3) { animation-delay: 0.3s; }
-@keyframes bbTypingBounce {
-  0%, 100% { transform: translateY(0); opacity: 0.7; }
-  50% { transform: translateY(-4px); opacity: 1; }
-}
-
-/* SCROLLBARS */
-.ck-chat-scrollable {
-  scrollbar-width: thin;
-  scrollbar-color: var(--bb-scrollbar-thumb) transparent;
-}
-.ck-chat-scrollable::-webkit-scrollbar { width: 6px; }
-.ck-chat-scrollable::-webkit-scrollbar-thumb {
-  background: var(--bb-scrollbar-thumb);
-  border-radius: 10px;
-  opacity: 0;
-  transition: opacity var(--bb-transition-medium);
-}
-.ck-chat-scrollable:hover::-webkit-scrollbar-thumb {
-  opacity: 0.8;
-}
-
-/* HISTORY PANEL */
-.ck-history-panel {
-  animation: bbHistoryFadeIn 0.35s ease;
-  padding: 10px !important;
-}
-@keyframes bbHistoryFadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 /* COMPOSER */
-.ck-composer {
-  border-radius: 9999px !important;
-  transition:
-    box-shadow var(--bb-transition-medium),
-    border-color var(--bb-transition-medium),
-    background-color var(--bb-transition-medium);
-}
 .ck-composer:focus-within {
   box-shadow: 0 0 0 2px var(--bb-accent);
   border-color: var(--bb-accent) !important;
-  background-color: #faf7ff !important;
-}
-
-/* BUTTONS */
-.ck-button {
-  border-radius: 9999px !important;
-  transition:
-    transform var(--bb-transition-fast),
-    box-shadow var(--bb-transition-medium),
-    background-color var(--bb-transition-medium),
-    color var(--bb-transition-medium);
-}
-.ck-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-}
-.ck-button:active {
-  transform: translateY(0);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
-}
-
-/* LAYOUT */
-.bb-header-animate {
-  animation: bbHeaderSlideIn 0.9s ease-out forwards;
-  opacity: 0;
-  transform: translateX(-20px);
-  position: relative;
-  z-index: 2;
-}
-@keyframes bbHeaderSlideIn {
-  to { opacity: 1; transform: translateX(0); }
-}
-.bb-gold-slide {
-  animation: bbGoldSlideIn 0.9s ease-out forwards;
-  transform: scaleX(0);
-  transform-origin: left;
-}
-@keyframes bbGoldSlideIn {
-  to { transform: scaleX(1); }
-}
-.bb-chat-fade {
-  animation: bbChatFadeUp 1.1s ease-out forwards;
-  opacity: 0;
-  transform: translateY(18px);
-}
-@keyframes bbChatFadeUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* FIX: Lavender chat background (new ChatKit classes) */
-.ck-chat,
-.ck-chat-wrapper,
-.ck-chat-container,
-.ck-chat-scrollable,
-.ck-chat-root {
-  background: #faf7ff !important;
-}
-
-/* FIX: Outgoing bubble always purple (new ChatKit classes) */
-.ck-message--outgoing,
-.ck-message--outgoing .ck-message-bubble,
-.ck-message--outgoing * {
-  background-color: var(--bb-accent) !important;
-  color: white !important;
-}
-
-/* FIX: Smooth glow for house selector */
-.bb-house-select {
-  transition:
-    box-shadow var(--bb-transition-medium),
-    transform var(--bb-transition-medium),
-    opacity var(--bb-transition-medium);
-}
-.bb-house-select:hover {
-  box-shadow: 0 0 14px var(--bb-accent) !important;
-  transform: scale(1.02);
-  opacity: 1;
+  background-color: #EEE5FF !important;
 }
 
 /* RESPONSIVE */
 .bb-card {
   box-shadow: var(--bb-shadow-strong);
 }
-@media (max-width: 768px) {
-  .bb-card { box-shadow: var(--bb-shadow-medium); }
-}
-@media (max-width: 640px) {
-  .bb-card { box-shadow: var(--bb-shadow-light); }
-}
-.bb-chat-shell { height: 70vh; }
-@media (max-width: 1024px) { .bb-chat-shell { height: 66vh; } }
-@media (max-width: 768px) { .bb-chat-shell { height: 62vh; } }
-@media (max-width: 480px) { .bb-chat-shell { height: 58vh; } }
-
-body { overflow-x: hidden; }
 `}
       </style>
 
@@ -326,25 +215,8 @@ body { overflow-x: hidden; }
           <div className="bb-chat-shell bb-chat-fade">
             <ChatKit
               control={chatkit.control}
-              className="
-                h-full w-full
-                [&_.ck-message-out]:text-white
-                [&_.ck-message-out]:rounded-full
-                [&_.ck-message-out]:shadow-md
-                [&_.ck-message-out]:px-4
-                [&_.ck-message-out]:py-2
-                [&_.ck-message-in]:bg-white
-                [&_.ck-message-in]:text-[#4D277B]
-                [&_.ck-message-in]:border
-                [&_.ck-message-in]:border-[#E5E5E5]
-                [&_.ck-message-in]:rounded-xl
-                [&_.ck-message-in]:shadow-sm
-                [&_.ck-message-in]:px-4
-                [&_.ck-message-in]:py-2
-                [&_.ck-message-group]:my-3
-              "
+              className="h-full w-full"
               style={{
-                ["--ck-message-out-bg" as string]: `${accent} !important`,
                 ["--ck-accent-color" as string]: accent,
                 ["--ck-accent-color-hover" as string]: accent,
                 ["--ck-accent-color-active" as string]: accent,
