@@ -27,7 +27,7 @@ export function ChatKitPanel() {
 
   const houseThemes: Record<string, string> = {
     default: "#4D277B",
-    mackillop: "#A5CB7E", // corrected spelling
+    mackillop: "#A5CB7E",
     hildegard: "#1F7DFF",
     ingham: "#766BE9",
     norcia: "#EF985A",
@@ -232,20 +232,32 @@ export function ChatKitPanel() {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* RESTORE LAVENDER CHAT BACKGROUND */
-.ck-chat-root {
+/* FIX: Lavender chat background */
+.ck-chat-root,
+.ck-chat,
+.ck-chat-scrollable {
   background: #faf7ff !important;
 }
 
-/* RESTORE PURPLE OUTGOING BUBBLES */
-.ck-message-out {
-  background: var(--bb-accent) !important;
+/* FIX: Outgoing bubble always purple */
+.ck-message-out,
+.ck-message-out .ck-message-bubble,
+.ck-message-out * {
+  background-color: var(--bb-accent) !important;
   color: white !important;
 }
 
-/* RESTORE HOUSE SELECTOR GLOW */
-select.bb-house-select:hover {
-  box-shadow: 0 0 12px var(--bb-accent) !important;
+/* FIX: Smooth glow for house selector */
+.bb-house-select {
+  transition:
+    box-shadow var(--bb-transition-medium),
+    transform var(--bb-transition-medium),
+    opacity var(--bb-transition-medium);
+}
+.bb-house-select:hover {
+  box-shadow: 0 0 14px var(--bb-accent) !important;
+  transform: scale(1.02);
+  opacity: 1;
 }
 
 /* RESPONSIVE */
