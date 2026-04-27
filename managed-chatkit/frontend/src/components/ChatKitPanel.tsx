@@ -27,7 +27,7 @@ export function ChatKitPanel() {
 
   const houseThemes: Record<string, string> = {
     default: "#4D277B",
-    mackillop: "#A5CB7E",
+    mackillop: "#A5CB7E", // corrected spelling
     hildegard: "#1F7DFF",
     ingham: "#766BE9",
     norcia: "#EF985A",
@@ -41,7 +41,7 @@ export function ChatKitPanel() {
   const rootVars: CSSProperties = {
     ["--bb-purple" as string]: purple,
     ["--bb-accent" as string]: accent,
-    ["--bb-third-color" as string]: house === "default" ? "#ffffff" : accent,
+    ["--bb-third-color" as string]: house === "default" ? "#faf7ff" : accent,
     ["--bb-glow-color" as string]: accent,
     ["--bb-scrollbar-thumb" as string]: accent,
     ["--bb-shadow-strong" as string]: "0 18px 45px rgba(0,0,0,0.18)",
@@ -232,6 +232,22 @@ export function ChatKitPanel() {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* RESTORE LAVENDER CHAT BACKGROUND */
+.ck-chat-root {
+  background: #faf7ff !important;
+}
+
+/* RESTORE PURPLE OUTGOING BUBBLES */
+.ck-message-out {
+  background: var(--bb-accent) !important;
+  color: white !important;
+}
+
+/* RESTORE HOUSE SELECTOR GLOW */
+select.bb-house-select:hover {
+  box-shadow: 0 0 12px var(--bb-accent) !important;
+}
+
 /* RESPONSIVE */
 .bb-card {
   box-shadow: var(--bb-shadow-strong);
@@ -276,10 +292,10 @@ body { overflow-x: hidden; }
               <select
                 value={house}
                 onChange={(e) => setHouse(e.target.value)}
-                className="text-xs sm:text-sm text-[#4D277B] bg-white rounded-lg px-2 sm:px-3 py-1 shadow border border-[#E5E5E5] bb-house-select max-w-[52%] sm:max-w-none"
+                className="bb-house-select text-xs sm:text-sm text-[#4D277B] bg-white rounded-lg px-2 sm:px-3 py-1 shadow border border-[#E5E5E5] max-w-[52%] sm:max-w-none"
               >
                 <option value="default">Default (Purple)</option>
-                <option value="mackillop">MacKillop (Green)</option>
+                <option value="mackillop">Mackillop (Green)</option>
                 <option value="hildegard">Hildegard (Blue)</option>
                 <option value="ingham">Ingham (Purple)</option>
                 <option value="norcia">Norcia (Orange)</option>
@@ -314,7 +330,7 @@ body { overflow-x: hidden; }
                 [&_.ck-message-group]:my-3
               "
               style={{
-                ["--ck-message-out-bg" as string]: accent,
+                ["--ck-message-out-bg" as string]: `${accent} !important`,
                 ["--ck-accent-color" as string]: accent,
                 ["--ck-accent-color-hover" as string]: accent,
                 ["--ck-accent-color-active" as string]: accent,
