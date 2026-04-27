@@ -232,17 +232,19 @@ export function ChatKitPanel() {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* FIX: Lavender chat background */
-.ck-chat-root,
+/* FIX: Lavender chat background (new ChatKit classes) */
 .ck-chat,
-.ck-chat-scrollable {
+.ck-chat-wrapper,
+.ck-chat-container,
+.ck-chat-scrollable,
+.ck-chat-root {
   background: #faf7ff !important;
 }
 
-/* FIX: Outgoing bubble always purple */
-.ck-message-out,
-.ck-message-out .ck-message-bubble,
-.ck-message-out * {
+/* FIX: Outgoing bubble always purple (new ChatKit classes) */
+.ck-message--outgoing,
+.ck-message--outgoing .ck-message-bubble,
+.ck-message--outgoing * {
   background-color: var(--bb-accent) !important;
   color: white !important;
 }
